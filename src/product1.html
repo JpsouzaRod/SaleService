@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medusa Longsleeve</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .product-detail-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .product-detail-container img {
+            max-width: 30%;
+            border-radius: 10px;
+            flex: 1 1 150px;
+        }
+
+        .product-info {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .product-info h2 {
+            margin-top: 0;
+            font-size: 24px;
+            color: #007BFF;
+        }
+
+        .product-info p {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .product-info h3 {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .comments {
+            margin-top: 40px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .rating-summary, .comment-list {
+            flex: 1;
+        }
+
+        .rating-summary p {
+            margin: 5px 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .comment {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .comment:last-child {
+            border-bottom: none;
+        }
+
+        .rating {
+            font-size: 20px;
+            color: #FFD700;
+            margin-bottom: 5px;
+        }
+
+        .comment p {
+            margin: 0;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .product-detail-container, .comments {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>MEDUSA STORE</h1>
+    </header>
+    <div class="container">
+        <div class="product-detail-container">
+            <img src="./images/image1.png" alt="Medusa Longsleeve">
+            <div class="product-info">
+                <h2>Medusa Longsleeve</h2>
+                <p>Reimagine the feeling of a classic longsleeve. With our cotton longsleeve, everyday essentials no longer have to be ordinary.</p>
+                <h3>Product Information</h3>
+                <p>Material: 100% Cotton</p>
+                <h3>Shipping & Returns</h3>
+                <p>Free shipping on orders over $50. 30-day return policy.</p>
+            </div>
+        </div>
+        <div class="comments">
+            <div class="rating-summary">
+                <h2>Customer Reviews</h2>
+                <p>★★★★★ - 2 reviews</p>
+                <p>★★★★☆ - 1 review</p>
+                <p>★★★☆☆ - 0 reviews</p>
+                <p>★★☆☆☆ - 0 reviews</p>
+                <p>★☆☆☆☆ - 0 reviews</p>
+            </div>
+
+            <div class="comment-list">
+                <div class="comment">
+                    <span class="rating">★★★★★</span>
+                    <p>Very good product, comfortable and stylish.</p>
+                </div>
+                <div class="comment">
+                    <span class="rating">★★★★☆</span>
+                    <p>Great quality, but the size runs a bit small.</p>
+                </div>
+                <div class="comment">
+                    <span class="rating">★★★★★</span>
+                    <p>Excellent value for the price. Highly recommend!</p>
+                </div>
+            </div>
