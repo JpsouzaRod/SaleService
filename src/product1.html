@@ -120,7 +120,7 @@
 </head>
 <body>
     <header>
-        <h1>MEDUSA STORE</h1>
+        <h1><a href="/" style="color: inherit; text-decoration: none;">MEDUSA STORE</a></h1>
     </header>
     <div class="container">
         <div class="product-detail-container">
@@ -133,6 +133,26 @@
                 <h3>Shipping & Returns</h3>
                 <p>Free shipping on orders over $50. 30-day return policy.</p>
             </div>
+
+            <div class="review-form">
+                <h3>Submit Your Review</h3>
+                <form id="review-form">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required><br><br>
+                    <label for="rating">Rating:</label>
+                    <select id="rating" name="rating" required>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select><br><br>
+                    <label for="comment">Comment:</label><br>
+                    <textarea id="comment" name="comment" rows="4" cols="50" required></textarea><br><br>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+
         </div>
         <div class="comments">
             <div class="rating-summary">
@@ -144,17 +164,67 @@
                 <p>★☆☆☆☆ - 0 reviews</p>
             </div>
 
-            <div class="comment-list">
-                <div class="comment">
-                    <span class="rating">★★★★★</span>
-                    <p>Very good product, comfortable and stylish.</p>
-                </div>
-                <div class="comment">
-                    <span class="rating">★★★★☆</span>
-                    <p>Great quality, but the size runs a bit small.</p>
-                </div>
-                <div class="comment">
-                    <span class="rating">★★★★★</span>
-                    <p>Excellent value for the price. Highly recommend!</p>
-                </div>
+            <div class="comment-list" id="comment-list">
             </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    // Exemplo de chamada para a API usando Fetch
+    fetch('http://127.0.0.1:5000/get_reviews?produto_id=Fone%20QCY%20T13')
+        .then(response => response.json())
+        .then(data => {
+            
+            // Preenche os reviews
+            const ratingSummary = document.getElementById('rating-summary');
+            const commentList = document.getElementById('comment-list');
+            data.avaliacoes.forEach(review => {
+                const stars = '★'.repeat(review.nota) + '☆'.repeat(5 - review.nota);
+                const commentDiv = document.createElement('div');
+                commentDiv.classList.add('comment');
+                commentDiv.innerHTML = `<span class="rating">${stars}</span><p>${review.avaliacao}</p>`;
+                commentList.appendChild(commentDiv);
+            });
+
+            // Exemplo de resumo de ratings
+            const ratings = data.reviews.reduce((acc, review) => {
+                acc[review.rating - 1]++;
+                return acc;
+            }, [0, 0, 0, 0, 0]);
+
+            ratings.forEach((count, index) => {
+                const stars = '★'.repeat(5 - index) + '☆'.repeat(index);
+                ratingSummary.innerHTML += `<p>${stars} - ${count} reviews</p>`;
+            });
+        })
+        .catch(error => console.error('Error fetching product data:', error));
+
+        document.getElementById('review-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita o envio padrão do formulário
+
+            const formData = {
+                nome_usuario: document.getElementById('name').value,
+                nota: parseInt(document.getElementById('rating').value),
+                avaliacao: document.getElementById('comment').value,
+                produto_id: "Teste"
+
+            };
+
+            fetch('http://127.0.0.1:5000/save_review', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Review submitted aaa!');
+                document.getElementById('review-form').reset();
+                // Atualiza os reviews na página, caso necessário
+                // Aqui você pode adicionar a lógica para recarregar os reviews
+            })
+            .catch(error => console.error('Error submitting review:', error));
+        });
+</script>
